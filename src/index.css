@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design System: Netflix-inspired dark theme (all HSL) */
+@layer base {
+  :root {
+    /* Core surfaces */
+    --background: 0 0% 6%;         /* near #0f0f0f */
+    --foreground: 0 0% 98%;
+
+    --card: 0 0% 8%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 0% 8%;
+    --popover-foreground: 0 0% 98%;
+
+    /* Brand (accent) */
+    --primary: 356 92% 49%;              /* Netflix red */
+    --primary-glow: 356 92% 60%;         /* lighter red for gradients */
+    --primary-foreground: 0 0% 98%;
+
+    /* Supporting */
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 96%;
+
+    --muted: 0 0% 16%;
+    --muted-foreground: 0 0% 70%;
+
+    --accent: 0 0% 14%;
+    --accent-foreground: 0 0% 96%;
+
+    --destructive: 0 84% 55%;
+    --destructive-foreground: 0 0% 98%;
+
+    /* UI */
+    --border: 0 0% 18%;
+    --input: 0 0% 14%;
+    --ring: 356 92% 49%;
+
+    --radius: 0.75rem;
+
+    /* Sidebar */
+    --sidebar-background: 0 0% 7%;
+    --sidebar-foreground: 0 0% 92%;
+    --sidebar-primary: 356 92% 49%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 0 0% 12%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 0 0% 18%;
+    --sidebar-ring: 356 92% 49%;
+
+    /* Extras */
+    --shadow-glow: 0 0 40px hsl(var(--primary) / 0.35);
+  }
+
+  /* Light theme (optional) */
+  .light {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 356 92% 49%;
+    --primary-glow: 356 92% 60%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 356 92% 49%;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 356 92% 49%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 356 92% 49%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  }
+}
+
+/* Utilities & signature effects */
+@layer utilities {
+  .story-link {
+    @apply relative inline-block after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-primary after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left;
+  }
+  .hover-scale { @apply transition-transform duration-200 hover:scale-105; }
+  .pulse { @apply animate-[pulse_2s_cubic-bezier(0.4,0,0.6,1)_infinite]; }
+}
+
+@layer components {
+  /* Hero ambient aurora */
+  @keyframes aurora {
+    0% { transform: translate(-10%, -10%) scale(1); opacity: 0.35; }
+    50% { transform: translate(10%, 10%) scale(1.1); opacity: 0.5; }
+    100% { transform: translate(-10%, -10%) scale(1); opacity: 0.35; }
+  }
+  .hero-aurora {
+    position: absolute;
+    inset: -20% -10% auto -10%;
+    height: 140%;
+    background: radial-gradient(60% 60% at 50% 40%, hsl(var(--primary) / 0.25), transparent 60%);
+    filter: blur(40px);
+    animation: aurora 12s ease-in-out infinite;
+    pointer-events: none;
+  }
+}
